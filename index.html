@@ -31,31 +31,102 @@
     </style>
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-6"> 
-				<robot_title></robot_title>
-				<audio id="alarm" src="./sound/alarm.ogg" loop></audio>
-				<div>
-					<button type="button" class="btn btn-default" onclick="Poppy.setCompliant(false)">
-						<i class="fa fa-bolt"></i> Activer tous les moteurs
-					</button>
-					<button type="button" class="btn btn-default" onclick="Poppy.setCompliant(true)">
-						<i class="fa fa-bed"></i> Désactiver tous les moteurs
-					</button>
 
-					<button type="button" class="btn btn-default" onclick="Poppy.stopAllPrimitives(true)">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Monitoring Poppy </a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <li><a href="#motorsdiv">Motors</a></li>
+      <li><a href="#primitivesdiv">Behaviors</a></li>
+      <li><a href="#pcdatadiv">PC data</a></li>
+      <li><a href="services.php?python=start&web=snap" >Start Snap!</a></li>
+     <li><script>
+var host = "http://"+window.location.hostname;
+document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
+</script>
+</li>
+<li><a href="#pcdatadiv">Wifi config</a></li>
+      </ul>
+      </div>
+    
+  </div>
+</nav>
+
+
+
+	<div class="container-fluid">
+		<div class="row" >
+
+        <div class="col-md-6"> 
+        <robot_title></robot_title>
+            <robot></robot>
+        </div>
+        <div class="col-md-6" > 
+				
+            <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
+            <div id="motorsdiv" class="spaceup">
+                <button type="button" class="btn btn-default" onclick="Poppy.setCompliant(false)">
+                    <i class="fa fa-bolt"></i> Activer tous les moteurs
+                </button>
+                <br/>
+                <button type="button" class="btn btn-default" onclick="Poppy.setCompliant(true)">
+                    <i class="fa fa-bed"></i> Désactiver tous les moteurs
+                </button>
+                <br/>
+            </div>
+            <div  id="primitivesdiv">
+            <hr>
+                <button type="button" class="btn btn-default" onclick="Poppy.stopAllPrimitives(true)">
+                    <i class="fa fa-coffee"></i> Arreter toutes les primitives
+                </button>
+                <br/>
+                <button type="button" class="btn btn-default" onclick="">
+                    Speak
+                </button>
+                <br/>
+                <behavior></behavior>
+            </div>
+            
+            
+            <div  id="pcdatadiv" >
+            <hr>
+                <button type="button" class="btn btn-default" onclick="">
+                     Arreter le robot
+                </button>
+                <br/>
+                <button type="button" class="btn btn-default" onclick="">
+                     Redemarrer le robot
+                </button>
+                <br/>
+                IP
+            </div>
+        </div>
+
+    </div>
+
+        
+     <!--   <div class="row" id="primitivesdiv">
+			<div class="col-md-6"> 
+				
+		<button type="button" class="btn btn-default" onclick="Poppy.stopAllPrimitives(true)">
 						<i class="fa fa-coffee"></i> Arreter toutes les primitives
 					</button>
-				</div>
-				<br/>
 				<behavior></behavior>
-			</div>
-			<div class="col-md-6">
-				<robot></robot>
-			</div>
+			
 		</div>
-	</div>
+	</div> -->
+    
+    
 
 	<script src="lib/ajax.js"></script>
 	<script src="lib/rmodal/rmodal.min.js"></script>
@@ -68,8 +139,7 @@
 	<script src="lib/hammer.min.js"></script>
 	<script src="js/helpers.js"></script>
 	<script src="js/poppy-object.js"></script>
-	
-	
+
 	<script src="tags/robot.tag" type="riot/tag"></script>
 	<script src="tags/motor.tag" type="riot/tag"></script>
 	<script src="tags/behavior.tag" type="riot/tag"></script>

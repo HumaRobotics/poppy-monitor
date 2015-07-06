@@ -1,9 +1,18 @@
     	body{
     		font-size:9pt;
+			padding-top: 70px;
+			 /*width:100%;
+   max-width: 800px;
+   //margin: 0px auto;*/
     	}
     	sub small, small sub,sup small, small sup{
     		font-size:6pt;
     	}
+		
+		.spaceup{
+			padding-top: 70px;
+		}
+		
     	ul.motors{
     		margin:0px;
     		padding:0px;
