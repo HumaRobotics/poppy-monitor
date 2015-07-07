@@ -48,14 +48,13 @@
       <ul class="nav navbar-nav">
       <li><a href="#motorsdiv">Motors</a></li>
       <li><a href="#primitivesdiv">Behaviors</a></li>
-      <li><a href="#pcdatadiv">PC data</a></li>
-      <li><a href="services.php?python=start&web=snap" >Start Snap!</a></li>
+      <li><a href="#pcdatadiv">Computer settings</a></li>
+      <li><a href="services.php?python=start&web=snap"  target="_blank" >Start Snap!</a></li>
      <li><script>
 var host = "http://"+window.location.hostname;
-document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
+document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebook</a>');
 </script>
 </li>
-<li><a href="#pcdatadiv">Wifi config</a></li>
       </ul>
       </div>
     
@@ -75,6 +74,7 @@ document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
 				
             <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
             <div id="motorsdiv" class="spaceup">
+            <h2> Motors</h2>
                 <button type="button" class="btn btn-default" onclick="Poppy.setCompliant(false)">
                     <i class="fa fa-bolt"></i> Activer tous les moteurs
                 </button>
@@ -82,17 +82,22 @@ document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
                 <button type="button" class="btn btn-default" onclick="Poppy.setCompliant(true)">
                     <i class="fa fa-bed"></i> Désactiver tous les moteurs
                 </button>
+                
                 <br/>
             </div>
             <div  id="primitivesdiv">
             <hr>
+            <h2>Behaviors</h2>
                 <button type="button" class="btn btn-default" onclick="Poppy.stopAllPrimitives(true)">
                     <i class="fa fa-coffee"></i> Arreter toutes les primitives
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="">
+               <!-- <form method=POST action="../cgi-bin/cgi_create_config_file.py"> -->
+                <input type="text" name="say" value="Bonjour" id="to_say"/>
+                <button type="button" class="btn btn-default" onclick="services.php?web=speak">
                     Speak
                 </button>
+                <a href="services.php?web=speak"  target="_blank" >Speak</a>
                 <br/>
                 <behavior></behavior>
             </div>
@@ -100,6 +105,11 @@ document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
             
             <div  id="pcdatadiv" >
             <hr>
+            <h2> Computer settings </h2>
+            <button type="button" class="btn btn-default" onclick="window.open('../wificonfig/?page=wireless')">
+                    Wifi configuration
+                </button>
+                <br/>
                 <button type="button" class="btn btn-default" onclick="">
                      Arreter le robot
                 </button>
@@ -108,7 +118,21 @@ document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
                      Redemarrer le robot
                 </button>
                 <br/>
-                IP
+                <p> Debug </p>
+                IP: %IP%
+                
+                <!--<a href="services.php?web=IP">get IP</a>
+                <script type="text/javascript">
+   //var ip = "<?php echo gethostname(); ?>";
+   //alert(ip)
+   // $host= gethostname();
+//$ip = gethostbyname($host);
+    var ip =location.host;
+    document.write("test")
+    document.write(ip)
+</script>-->
+<br/>
+                <a href="services.php?python=stop">Kill motor access</a>
             </div>
         </div>
 
@@ -143,8 +167,11 @@ document.write('<a href="' + host + ':8888' + '">Ipython notebook</a>');
 	<script src="tags/robot.tag" type="riot/tag"></script>
 	<script src="tags/motor.tag" type="riot/tag"></script>
 	<script src="tags/behavior.tag" type="riot/tag"></script>
+    <script src="tags/settings.tag" type="riot/tag"></script>
 	<script>
 		riot.mount('*');
 	</script>
+    
+
 </body>
 </html>

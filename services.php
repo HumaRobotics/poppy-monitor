@@ -30,6 +30,7 @@ if($_GET["python"] === "start") {
 } elseif($_GET["python"] === "stop") {
         echo "Stop python";
         exec('fuser -k /dev/ttyACM0');
+        display();
 } elseif($_GET["python"] === "update") {
         echo "Not implemented";
 } 
@@ -49,6 +50,38 @@ if($_GET["web"] === "poppy-monitor"){
                 </script>
 	";
 }
+if($_GET["web"] === "IP"){
+$ip =$_SERVER['REMOTE_ADDR'];
+	echo "
+                <script type=\"text/javascript\">
+                document.write(\"".$ip."\");
+                </script>
+	";
+    
+    	/*echo "
+                <script type=\"text/javascript\">
+                alert(\"".$ip."\");
+                </script>
+	";*/
+}
+if($_GET["web"] === "speak"){
+shell_exec("echo moa > /home/poppy/data.txt");
+	shell_exec ('picospeaker -l "fr-FR" "bonjour"');
+    display();
+}
+
+if (empty($_GET)) {
+    display();
+}
+
+function display() 
+  {
+    $contents = file_get_contents("index.html");
+    $ip =$_SERVER['REMOTE_ADDR'];
+$contents = str_replace("%IP%", $ip, $contents);
+echo $contents;
+  }
+
 ?>
 </body>
 
