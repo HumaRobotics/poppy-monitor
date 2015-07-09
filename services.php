@@ -15,7 +15,6 @@ function tty($kill) {
 }
 
 if(array_key_exists("python", $_GET)){
-    echo "bla python ";
 
 // Start python only if not previously started
 if($_GET["python"] === "start") {
@@ -46,7 +45,6 @@ if($_GET["python"] === "start") {
 }
 
 if(array_key_exists("web", $_GET)){
-    echo "bla web ";
 
 
 if($_GET["web"] === "snap"){
@@ -65,12 +63,17 @@ elseif($_GET["web"] === "poppy-monitor"){
 	";
 }
 elseif($_GET["web"] === "speak"){
-//shell_exec("echo moa > /home/poppy/data.txt");
-
-//shell_exec ('export USER=www-data');
+if(array_key_exists("say", $_GET)){
+//echo $_GET["say"];
 putenv("USER=poppy");
-echo shell_exec ('printenv | grep USER');
-	exec ('picospeaker -l "fr-FR" "bonjour" ');
+exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
+}
+/*else{
+echo "rien to say";
+}*/
+
+//echo shell_exec ('printenv | grep USER');
+	
     display();
 }
 }

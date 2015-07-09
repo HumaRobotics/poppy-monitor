@@ -95,11 +95,12 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     <i class="fa fa-coffee"></i> Arreter toutes les primitives
                 </button>
                 <br/>
-               <!-- <form method=POST action="../cgi-bin/cgi_create_config_file.py"> -->
+                <form method=GET action="services.php?web=speak"> -->
                 <input type="text" name="say" value="Bonjour" id="to_say"/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=speak')">
+                <button type="submit" name="web" value="speak" class="btn btn-default">
                     Speak
                 </button>
+                </form>
                 <br/>
                 <behavior></behavior>
             </div>
@@ -108,7 +109,7 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
             <div  id="pcdatadiv" >
             <hr>
             <h2> Computer settings </h2>
-            <button type="button" class="btn btn-default" onclick="window.open('../wificonfig/?page=wireless')">
+            <button type="button" class="btn btn-default" onclick="window.open('../wireless/?page=wireless')">
                     Wifi configuration
                 </button>
                 <br/>
@@ -169,7 +170,6 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 	<script src="tags/robot.tag" type="riot/tag"></script>
 	<script src="tags/motor.tag" type="riot/tag"></script>
 	<script src="tags/behavior.tag" type="riot/tag"></script>
-    <script src="tags/settings.tag" type="riot/tag"></script>
 	<script>
 		riot.mount('*');
 	</script>
