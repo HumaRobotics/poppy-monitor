@@ -21,12 +21,15 @@ if($_GET["python"] === "start") {
 	if (exec('fuser /dev/ttyACM0') == NULL){
 		echo "/dev/ttyACM0 is free";
 		// Start poppy-services
-		exec('/home/poppy/.pyenv/shims/poppy-services poppy-torso --http --snap --no-browser > services.log 2>&1 &');
+		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
+        //shell_exec( 'poppy-services --http poppy-humanoid &');
+        display();
 	}
 } elseif($_GET["python"] === "restart") {
 	echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
-	exec('/home/poppy/.pyenv/shims/poppy-services poppy-torso --http --snap --no-browser > services.log 2>&1 &');
+	exec('sudo /home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser > services.log 2>&1 &');
+    display();
 } elseif($_GET["python"] === "stop") {
         echo "Stop python";
         exec('fuser -k /dev/ttyACM0');
@@ -39,34 +42,24 @@ if($_GET["web"] === "snap"){
 	echo "Snap redirection";
 	echo "
            	<script type=\"text/javascript\">
-            	document.location.href=\"snap/\"
+            	document.location.href=\"../snap/\"
 		</script>
        	";
 }
-if($_GET["web"] === "poppy-monitor"){
+elseif($_GET["web"] === "poppy-monitor"){
 	echo "
                 <script type=\"text/javascript\">
                 document.location.href=\"poppy-monitor/\"
                 </script>
 	";
 }
-if($_GET["web"] === "IP"){
-$ip =$_SERVER['REMOTE_ADDR'];
-	echo "
-                <script type=\"text/javascript\">
-                document.write(\"".$ip."\");
-                </script>
-	";
-    
-    	/*echo "
-                <script type=\"text/javascript\">
-                alert(\"".$ip."\");
-                </script>
-	";*/
-}
-if($_GET["web"] === "speak"){
-shell_exec("echo moa > /home/poppy/data.txt");
-	shell_exec ('picospeaker -l "fr-FR" "bonjour"');
+elseif($_GET["web"] === "speak"){
+//shell_exec("echo moa > /home/poppy/data.txt");
+
+//shell_exec ('export USER=www-data');
+putenv("USER=poppy");
+echo shell_exec ('printenv | grep USER');
+	exec ('picospeaker -l "fr-FR" "bonjour" ');
     display();
 }
 

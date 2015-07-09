@@ -74,6 +74,9 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 				
             <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
             <div id="motorsdiv" class="spaceup">
+            <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?python=start')">
+                    <i class="fa fa-bolt"></i> Lancer les services
+                </button>
             <h2> Motors</h2>
                 <button type="button" class="btn btn-default" onclick="Poppy.setCompliant(false)">
                     <i class="fa fa-bolt"></i> Activer tous les moteurs
@@ -94,10 +97,9 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                 <br/>
                <!-- <form method=POST action="../cgi-bin/cgi_create_config_file.py"> -->
                 <input type="text" name="say" value="Bonjour" id="to_say"/>
-                <button type="button" class="btn btn-default" onclick="services.php?web=speak">
+                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=speak')">
                     Speak
                 </button>
-                <a href="services.php?web=speak"  target="_blank" >Speak</a>
                 <br/>
                 <behavior></behavior>
             </div>
@@ -172,6 +174,8 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 		riot.mount('*');
 	</script>
     
+
+
 
 </body>
 </html>
