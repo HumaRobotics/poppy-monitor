@@ -77,6 +77,10 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
             <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?python=start')">
                     <i class="fa fa-bolt"></i> Lancer les services
                 </button>
+                <br/>
+                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?python=stop')">
+                    <i class="fa fa-bolt"></i> Tuer les services
+                </button>
             <h2> Motors</h2>
                 <button type="button" class="btn btn-default" onclick="Poppy.setCompliant(false)">
                     <i class="fa fa-bolt"></i> Activer tous les moteurs
@@ -113,46 +117,23 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     Wifi configuration
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="">
+                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=poweroff')">
                      Arreter le robot
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="">
+                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=reboot')">
                      Redemarrer le robot
                 </button>
                 <br/>
                 <p> Debug </p>
                 IP: %IP%
-                
-                <!--<a href="services.php?web=IP">get IP</a>
-                <script type="text/javascript">
-   //var ip = "<?php echo gethostname(); ?>";
-   //alert(ip)
-   // $host= gethostname();
-//$ip = gethostbyname($host);
-    var ip =location.host;
-    document.write("test")
-    document.write(ip)
-</script>-->
-<br/>
-                <a href="services.php?python=stop">Kill motor access</a>
+
             </div>
         </div>
 
     </div>
 
-        
-     <!--   <div class="row" id="primitivesdiv">
-			<div class="col-md-6"> 
-				
-		<button type="button" class="btn btn-default" onclick="Poppy.stopAllPrimitives(true)">
-						<i class="fa fa-coffee"></i> Arreter toutes les primitives
-					</button>
-				<behavior></behavior>
-			
-		</div>
-	</div> -->
-    
+
     
 
 	<script src="lib/ajax.js"></script>

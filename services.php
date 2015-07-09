@@ -55,13 +55,6 @@ if($_GET["web"] === "snap"){
 		</script>
        	";
 }
-elseif($_GET["web"] === "poppy-monitor"){
-	echo "
-                <script type=\"text/javascript\">
-                document.location.href=\"poppy-monitor/\"
-                </script>
-	";
-}
 elseif($_GET["web"] === "speak"){
 if(array_key_exists("say", $_GET)){
 //echo $_GET["say"];
@@ -75,6 +68,14 @@ echo "rien to say";
 //echo shell_exec ('printenv | grep USER');
 	
     display();
+}
+elseif($_GET["web"] === "reboot"){
+	echo " rebooting ";
+    exec("sudo reboot");
+}
+elseif($_GET["web"] === "poweroff"){
+	echo " power off ";
+    exec("sudo poweroff");
 }
 }
 
