@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+ <!--<!DOCTYPE html>
 <html>
 <head>
 <title>Poppy script page</title>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />-->
 <?php
 function tty($kill) {
 	if($kill == true) {
@@ -14,11 +14,14 @@ function tty($kill) {
 	}
 }
 
+if(array_key_exists("python", $_GET)){
+    echo "bla python ";
+
 // Start python only if not previously started
 if($_GET["python"] === "start") {
 	echo "python start";
 
-	if (exec('fuser /dev/ttyACM0') == NULL){
+	if (exec('fuser /dev/ttyACM0') == NULL ){
 		echo "/dev/ttyACM0 is free";
 		// Start poppy-services
 		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
@@ -28,15 +31,23 @@ if($_GET["python"] === "start") {
 } elseif($_GET["python"] === "restart") {
 	echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
-	exec('sudo /home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser > services.log 2>&1 &');
+    exec('fuser -k /dev/ttyACM1');
+	exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser ');
     display();
 } elseif($_GET["python"] === "stop") {
         echo "Stop python";
+        exec('fuser -k /dev/ttyACM1');
+        //sleep(1);
         exec('fuser -k /dev/ttyACM0');
         display();
 } elseif($_GET["python"] === "update") {
         echo "Not implemented";
 } 
+}
+
+if(array_key_exists("web", $_GET)){
+    echo "bla web ";
+
 
 if($_GET["web"] === "snap"){
 	echo "Snap redirection";
@@ -62,6 +73,7 @@ echo shell_exec ('printenv | grep USER');
 	exec ('picospeaker -l "fr-FR" "bonjour" ');
     display();
 }
+}
 
 if (empty($_GET)) {
     display();
@@ -76,7 +88,7 @@ echo $contents;
   }
 
 ?>
-</body>
+<!--</body>
 
-</html>
+</html>-->
 
