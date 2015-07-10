@@ -49,7 +49,7 @@
       <li><a href="#motorsdiv">Motors</a></li>
       <li><a href="#primitivesdiv">Behaviors</a></li>
       <li><a href="#pcdatadiv">Computer settings</a></li>
-      <li><a href="services.php?python=start&web=snap"  target="_blank" >Start Snap!</a></li>
+      <li><a href="services.php?python=start&web=snap" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
      <li><script>
 var host = "http://"+window.location.hostname;
 document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebook</a>');
@@ -61,9 +61,13 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
   </div>
 </nav>
 
-
-
 	<div class="container-fluid">
+
+%COMMENTS%
+
+
+
+
 		<div class="row" >
 
         <div class="col-md-6"> 
@@ -71,6 +75,8 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
             <robot></robot>
         </div>
         <div class="col-md-6" > 
+        
+            
 				
             <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
             <div id="motorsdiv" class="spaceup">
@@ -117,7 +123,7 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     Wifi configuration
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=poweroff')">
+                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=poweroff')"> 
                      Arreter le robot
                 </button>
                 <br/>
@@ -128,13 +134,35 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                 <p> Debug </p>
                 IP: %IP%
 
+
+
+ <!--<div class="modal fade" id="stopmodal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Arreter le robot</h4>
+        </div>
+        <div class="modal-body">
+          <p>Etes vous sur ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Oui</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
             </div>
         </div>
 
-    </div>
 
 
-    
+
+
+        </div>
 
 	<script src="lib/ajax.js"></script>
 	<script src="lib/rmodal/rmodal.min.js"></script>
