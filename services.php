@@ -20,23 +20,22 @@ if(array_key_exists("python", $_GET)){
 
 // Start python only if not previously started
 if($_GET["python"] === "start") {
-	echo "python start";
+	//echo "python start";
 
 	if (exec('fuser /dev/ttyACM0') == NULL ){
-		echo "/dev/ttyACM0 is free";
+		//echo "/dev/ttyACM0 is free";
 		// Start poppy-services
 		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
-        //shell_exec( 'poppy-services --http poppy-humanoid &');
         display();
 	}
 } elseif($_GET["python"] === "restart") {
-	echo "Restart python";
+	//echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
     exec('fuser -k /dev/ttyACM1');
 	exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser ');
     display();
 } elseif($_GET["python"] === "stop") {
-        echo "Stop python";
+        //echo "Stop python";
         exec('fuser -k /dev/ttyACM1');
         //sleep(1);
         exec('fuser -k /dev/ttyACM0');
@@ -57,8 +56,11 @@ echo "
        	";
 
 	 global $comments;
-  $comments ='<div class="panel panel-default">
-Pour avoir les blocs Snap!, dans l\'onglet de Snap!, cliquez sur le fichier, puis ouvrir, puis exemples et choisissez pypot-snap-block.
+ /* $comments ='<div class="panel panel-default">
+Pour avoir les blocs Snap! pour Poppy, dans l\'onglet de Snap!, cliquez sur le fichier, puis ouvrir, puis exemples et choisissez pypot-snap-block.
+  </div>';*/
+    $comments ='<div class="panel panel-default">
+   <p> To get Poppy\'s Snap! blocks, click on the file icon, then open->examples and select pypot-snap-block.</p>
   </div>';
    display();
    
@@ -74,7 +76,8 @@ elseif($_GET["web"] === "speak"){
 if(array_key_exists("say", $_GET)){
 //echo $_GET["say"];
 putenv("USER=poppy");
-exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
+//~ exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
+exec ('picospeaker  "'.$_GET["say"].'" ');
 
 }
 /*else{
@@ -90,10 +93,10 @@ elseif($_GET["web"] === "reboot"){
   $comments ='<div class="panel panel-default">
 <h2> reboot : Are you sure ? </h2>
       <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php?web=rebootsure\')"> 
-                     Oui
+                     Yes
                 </button>
       <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php\')"> 
-                     Annuler
+                     Cancel
                 </button>
   </div>';
    display();
@@ -110,15 +113,16 @@ elseif($_GET["web"] === "poweroff"){
   $comments ='<div class="panel panel-default">
 <h2> Poweroff: Are you sure ? </h2>
       <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php?web=poweroffsure\')"> 
-                     Oui
+                     Yes
                 </button>
       <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php\')"> 
-                     Annuler
+                     Cancel
                 </button>
   </div>';
    display();
 }
 elseif($_GET["web"] === "poweroffsure"){
+echo "poweroff";
 	 exec("sudo poweroff");
 }
 }
