@@ -92,10 +92,10 @@ elseif($_GET["web"] === "reboot"){
     global $comments;
   $comments ='<div class="panel panel-default">
 <h2> reboot : Are you sure ? </h2>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php?web=rebootsure\')"> 
+      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php?web=rebootsure\')"> 
                      Yes
                 </button>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php\')"> 
+      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php\')"> 
                      Cancel
                 </button>
   </div>';
@@ -112,10 +112,10 @@ elseif($_GET["web"] === "poweroff"){
     
   $comments ='<div class="panel panel-default">
 <h2> Poweroff: Are you sure ? </h2>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php?web=poweroffsure\')"> 
+      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php?web=poweroffsure\')"> 
                      Yes
                 </button>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'services.php\')"> 
+      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php\')"> 
                      Cancel
                 </button>
   </div>';
@@ -133,7 +133,7 @@ if (empty($_GET)) {
 
 function display() 
   {
-    $contents = file_get_contents("index.html");
+    $contents = file_get_contents("poppy_webapps.html");
     $ip =$_SERVER['SERVER_ADDR'];
 $contents = str_replace("%IP%", $ip, $contents);
 global $comments;

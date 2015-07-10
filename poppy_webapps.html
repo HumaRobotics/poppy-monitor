@@ -49,7 +49,7 @@
       <li><a href="#motorsdiv">Motors</a></li>
       <li><a href="#primitivesdiv">Behaviors</a></li>
       <li><a href="#pcdatadiv">Computer settings</a></li>
-      <li><a href="services.php?python=start&web=snap" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
+      <li><a href="index.php?python=start&web=snap" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
      <li><script>
 var host = "http://"+window.location.hostname;
 document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebooks</a>');
@@ -77,11 +77,11 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 				
             <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
             <div id="motorsdiv" class="spaceup">
-            <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?python=start')">
+            <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?python=start')">
                     <i class="fa fa-bolt"></i> Start services
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?python=stop')">
+                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?python=stop')">
                     <i class="fa fa-bolt"></i> Kill services
                 </button>
             <h2> Motors</h2>
@@ -102,7 +102,7 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     <i class="fa fa-coffee"></i> Stop all primitives
                 </button>
                 <br/>
-                <form method=GET action="services.php?web=speak"> -->
+                <form method=GET action="index.php?web=speak"> -->
                 <input type="text" name="say" value="Hello" id="to_say"/>
                 <button type="submit" name="web" value="speak" class="btn btn-default">
                     Speak
@@ -120,11 +120,11 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     Wifi configuration
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=poweroff')"> 
+                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=poweroff')"> 
                      Power off
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('services.php?web=reboot')">
+                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=reboot')">
                      Reboot
                 </button>
                 <br/>
