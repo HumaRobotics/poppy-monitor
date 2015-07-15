@@ -88,6 +88,25 @@ echo "rien to say";
 	
     display();
 }
+elseif($_GET["web"] === "upgrade"){
+    
+    putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
+  exec('eval "$(pyenv init -)"');
+ exec( 'eval "$(pyenv virtualenv-init -)"');
+ 
+ $comments ='<div class="panel panel-default">
+<p> Current versions</p>
+<p> '.checkVersions().'</p>';
+    
+    exec("pip install --upgrade poppy-humanoid > upgrades.log 2>&1 ");
+    
+    $comments =$comments.'
+<p> Checking for upgrades</p>
+<p> New versions:</p>
+<p> '.checkVersions().'</p>
+  </div>';
+  display();
+}
 elseif($_GET["web"] === "reboot"){
     global $comments;
   $comments ='<div class="panel panel-default">
@@ -129,6 +148,14 @@ echo "poweroff";
 
 if (empty($_GET)) {
     display();
+}
+
+function checkVersions(){
+$poppy_humanoid = file_get_contents("/home/poppy/dev/poppy-humanoid/software/poppy_humanoid/_version.py");
+$pypot = file_get_contents("/home/poppy/dev/pypot/pypot/_version.py");
+$poppy_creature = file_get_contents("/home/poppy/dev/poppy-creature/software/poppy/_version.py");
+
+return "<ul><li>poppy_humanoid ".$poppy_humanoid."</li><li>pypot ".$pypot."</li><li>poppy_creature ".$poppy_creature."</li></ul>";
 }
 
 function display() 
