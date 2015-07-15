@@ -95,7 +95,7 @@ elseif($_GET["web"] === "upgrade"){
  exec( 'eval "$(pyenv virtualenv-init -)"');
  
  $comments ='<div class="panel panel-default">
-<p> Current versions</p>
+<p> Current versions:</p>
 <p> '.checkVersions().'</p>';
     
     exec("pip install --upgrade poppy-humanoid > upgrades.log 2>&1 ");
@@ -158,14 +158,17 @@ $poppy_creature = file_get_contents("/home/poppy/dev/poppy-creature/software/pop
 return "<ul><li>poppy_humanoid ".$poppy_humanoid."</li><li>pypot ".$pypot."</li><li>poppy_creature ".$poppy_creature."</li></ul>";
 }
 
+
 function display() 
   {
+  
     $contents = file_get_contents("poppy_webapps.html");
     $ip =$_SERVER['SERVER_ADDR'];
 $contents = str_replace("%IP%", $ip, $contents);
 global $comments;
 $contents = str_replace("%COMMENTS%", $comments, $contents);
 echo $contents;
+
   }
 
 ?>
