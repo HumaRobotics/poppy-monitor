@@ -15,11 +15,14 @@ function tty($kill) {
 }
 
 $comments = "";
+//print_r($_POST);
 
-if(array_key_exists("python", $_GET)){
+//if(array_key_exists("python", $_GET)){
+if(array_key_exists("python", $_POST)){
 
 // Start python only if not previously started
-if($_GET["python"] === "start") {
+//if($_GET["python"] === "start") {
+if($_POST["python"] === "start") {
 	//echo "python start";
 
 	if (exec('fuser /dev/ttyACM0') == NULL ){
@@ -28,27 +31,32 @@ if($_GET["python"] === "start") {
 		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
         display();
 	}
-} elseif($_GET["python"] === "restart") {
+//} elseif($_GET["python"] === "restart") {
+} elseif($_POST["python"] === "restart") {
 	//echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
     exec('fuser -k /dev/ttyACM1');
 	exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser ');
     display();
-} elseif($_GET["python"] === "stop") {
+} elseif($_POST["python"] === "stop") {
+//} elseif($_GET["python"] === "stop") {
         //echo "Stop python";
         exec('fuser -k /dev/ttyACM1');
         //sleep(1);
         exec('fuser -k /dev/ttyACM0');
         display();
-} elseif($_GET["python"] === "update") {
+} elseif($_POST["python"] === "update") {
+//} elseif($_GET["python"] === "update") {
         echo "Not implemented";
 } 
 }
 
-if(array_key_exists("web", $_GET)){
+//if(array_key_exists("web", $_GET)){
+if(array_key_exists("web", $_POST)){
 
 
-if($_GET["web"] === "snap"){
+//if($_GET["web"] === "snap"){
+if($_POST["web"] === "snap"){
 echo "
            	<script type=\"text/javascript\">
             	window.open(\"../snap/\");
@@ -72,12 +80,15 @@ Pour avoir les blocs Snap! pour Poppy, dans l\'onglet de Snap!, cliquez sur le f
        	";*/
 
 }
-elseif($_GET["web"] === "speak"){
-if(array_key_exists("say", $_GET)){
+//elseif($_GET["web"] === "speak"){
+elseif($_POST["web"] === "speak"){
+//~ if(array_key_exists("say", $_GET)){
+if(array_key_exists("say", $_POST)){
 //echo $_GET["say"];
 putenv("USER=poppy");
 //~ exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
-exec ('picospeaker  "'.$_GET["say"].'" ');
+//~ exec ('picospeaker  "'.$_GET["say"].'" ');
+exec ('picospeaker  "'.$_POST["say"].'" ');
 
 }
 /*else{
@@ -88,7 +99,8 @@ echo "rien to say";
 	
     display();
 }
-elseif($_GET["web"] === "upgrade"){
+//~ elseif($_GET["web"] === "upgrade"){
+elseif($_POST["web"] === "upgrade"){
     
     putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
   exec('eval "$(pyenv init -)"');
@@ -107,46 +119,51 @@ elseif($_GET["web"] === "upgrade"){
   </div>';
   display();
 }
-elseif($_GET["web"] === "reboot"){
+//~ elseif($_GET["web"] === "reboot"){
+elseif($_POST["web"] === "reboot"){
     global $comments;
   $comments ='<div class="panel panel-default">
 <h2> reboot : Are you sure ? </h2>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php?web=rebootsure\')"> 
+      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {web: \'rebootsure\'})"> 
                      Yes
                 </button>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php\')"> 
+      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {})"> 
                      Cancel
                 </button>
   </div>';
    display();
 }
-elseif($_GET["web"] === "rebootsure"){
+elseif($_POST["web"] === "rebootsure"){
+//~ elseif($_GET["web"] === "rebootsure"){
 	echo " rebooting ";
     exec("sudo reboot");
 }
-elseif($_GET["web"] === "poweroff"){
+//elseif($_GET["web"] === "poweroff"){
+elseif($_POST["web"] === "poweroff"){
     global $comments;
    // $comments = "<h2> Poweroff: Are you sure ? </h2>";
     
     
   $comments ='<div class="panel panel-default">
 <h2> Poweroff: Are you sure ? </h2>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php?web=poweroffsure\')"> 
+      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {web: \'poweroffsure\'})"> 
                      Yes
                 </button>
-      <button type="button" class="btn btn-default" onclick="window.location.replace(\'index.php\')"> 
+      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {})"> 
                      Cancel
                 </button>
   </div>';
    display();
 }
-elseif($_GET["web"] === "poweroffsure"){
+//~ elseif($_GET["web"] === "poweroffsure"){
+elseif($_POST["web"] === "poweroffsure"){
 echo "poweroff";
 	 exec("sudo poweroff");
 }
 }
 
-if (empty($_GET)) {
+//~ if (empty($_GET)) {
+if (empty($_POST)) {
     display();
 }
 

@@ -77,11 +77,11 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 				
             <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
             <div id="motorsdiv" class="spaceup">
-            <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?python=start')">
+            <button type="button" class="btn btn-default" onclick="post('/index.php', {python: 'start'})">
                     <i class="fa fa-bolt"></i> Start services
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?python=stop')">
+                <button type="button" class="btn btn-default" onclick="post('/index.php', {python: 'stop'})">
                     <i class="fa fa-bolt"></i> Kill services
                 </button>
             <h2> Motors</h2>
@@ -120,15 +120,16 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     Wifi configuration
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=upgrade');">
+                <button type="button" class="btn btn-default" onclick="post('/index.php', {web: 'upgrade'})">
                     Software upgrade
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=poweroff')"> 
+                <!--<button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=poweroff')"> -->
+                <button type="button" class="btn btn-default" onclick="post('/index.php', {web: 'poweroff'})"> 
                      Power off
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=reboot')">
+                <button type="button" class="btn btn-default" onclick="post('/index.php', {web: 'reboot'})">
                      Reboot
                 </button>
                 <br/>
@@ -162,6 +163,30 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 	<script src="tags/behavior.tag" type="riot/tag"></script>
 	<script>
 		riot.mount('*');
+        
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
 	</script>
     
 
