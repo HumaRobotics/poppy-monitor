@@ -51,6 +51,42 @@ else
     echo "POPPY_ROOT=$POPPY_ROOT"
 fi
 
+
+
+
+################################################################################
+## Install home page
+################################################################################
+# fix some svn merge failed issue
+#rm $POPPY_WWW/services.php*
+
+# TODO: change repo URL after pull request
+#www_url=https://github.com/show0k/poppy-installer/trunk/install-deps/www-files
+www_url=https://github.com/HumaRobotics/poppy-monitor.git
+
+echo -e "\e[33mInstalling Home page from $www_url to $POPPY_WWW\e[0m"
+#svn checkout $www_url $POPPY_WWW
+if [ ! -d "$POPPY_WWW" ]; then
+    echo -e "\e[33mCloning Home page from $www_url to $POPPY_WWW\e[0m"
+    git clone  $www_url $POPPY_WWW
+else
+    echo -e "\e[33mPulling Home page from $www_url to $POPPY_WWW\e[0m"
+    cd $POPPY_WWW
+    git pull
+fi
+
+
+# Change creature name
+sed -i "s/poppy-torso/$POPPY_CREATURE/g" $POPPY_WWW/index.php
+#sed -i "s/poppy-torso/Robot $POPPY_CREATURE/g" $POPPY_WWW/poppy_webapps.html
+
+sed -i "s/poppy_torso/poppy_humanoid/g" $POPPY_WWW/index.php
+
+# Make $POPPY_USER owner of $POPPY_WWW
+echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
+sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
+
+
 ################################################################################
 ## Install Wifi php web app
 ################################################################################
@@ -93,36 +129,6 @@ if [ ! -d "$POPPY_WWW" ]; then
     mkdir $POPPY_WWW
 fi
 
-
-
-################################################################################
-## Install home page
-################################################################################
-# fix some svn merge failed issue
-#rm $POPPY_WWW/services.php*
-
-# TODO: change repo URL after pull request
-#www_url=https://github.com/show0k/poppy-installer/trunk/install-deps/www-files
-www_url=https://github.com/HumaRobotics/poppy-monitor.git
-
-echo -e "\e[33mInstalling Home page from $www_url to $POPPY_ROOT\e[0m"
-#svn checkout $www_url $POPPY_WWW
-git clone  $www_url $POPPY_WWW
-
-# Change creature name
-sed -i "s/poppy-torso/$POPPY_CREATURE/g" $POPPY_WWW/index.php
-#sed -i "s/poppy-torso/Robot $POPPY_CREATURE/g" $POPPY_WWW/poppy_webapps.html
-
-sed -i "s/poppy_torso/poppy_humanoid/g" $POPPY_WWW/index.php
-
-# Make $POPPY_USER owner of $POPPY_WWW
-echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
-sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
-
-
-################################################################################
-## Install wireless settings
-################################################################################
 # Download sources
 echo -e "\e[33mDownload sources\e[0m"
 sudo rm /usr/local/robot/websudoer/websudoer.sh
