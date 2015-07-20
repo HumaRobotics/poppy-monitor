@@ -109,6 +109,32 @@ sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
 echo -e "\e[33mRestart Apache\e[0m"
 sudo service apache2 restart
 
+
+################################################################################
+## Install home page
+################################################################################
+# fix some svn merge failed issue
+rm $POPPY_WWW/services.php*
+
+# TODO: change repo URL after pull request
+#www_url=https://github.com/show0k/poppy-installer/trunk/install-deps/www-files
+www_url=https://github.com/HumaRobotics/poppy-monitor.git
+
+echo -e "\e[33mInstalling Home page from $www_url to $POPPY_ROOT\e[0m"
+#svn checkout $www_url $POPPY_WWW
+git clone  $www_url $POPPY_WWW
+
+# Change creature name
+sed -i "s/poppy-torso/$POPPY_CREATURE/g" $POPPY_WWW/index.php
+#sed -i "s/poppy-torso/Robot $POPPY_CREATURE/g" $POPPY_WWW/poppy_webapps.html
+
+sed -i "s/poppy_torso/poppy_humanoid/g" $POPPY_WWW/index.php
+
+# Make $POPPY_USER owner of $POPPY_WWW
+echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
+sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
+
+
 ################################################################################
 ## Install Snap!
 ################################################################################
@@ -152,26 +178,4 @@ done
 #    rm -rf $poppy_monitor_dir
 #fi
 #git clone https://github.com/poppy-project/poppy-monitor.git $poppy_monitor_dir
-
-################################################################################
-## Install home page
-################################################################################
-# fix some svn merge failed issue
-rm $POPPY_WWW/services.php*
-
-# TODO: change repo URL after pull request
-#www_url=https://github.com/show0k/poppy-installer/trunk/install-deps/www-files
-www_url=https://github.com/HumaRobotics/poppy-monitor.git
-
-echo -e "\e[33mInstalling Home page from $www_url to $POPPY_ROOT\e[0m"
-#svn checkout $www_url $POPPY_WWW
-git clone  $www_url $POPPY_WWW
-
-# Change creature name
-sed -i "s/poppy-torso/$POPPY_CREATURE/g" $POPPY_WWW/services.php
-sed -i "s/poppy-torso/Robot $POPPY_CREATURE/g" $POPPY_WWW/index.html
-
-# Make $POPPY_USER owner of $POPPY_WWW
-echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
-sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
 

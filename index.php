@@ -1,10 +1,4 @@
- <!--<!DOCTYPE html>
-<html>
-<head>
-<title>Poppy script page</title>
-</head>
-<body>
-<link rel="stylesheet" type="text/css" href="css/style.css" />-->
+
 <?php
 function tty($kill) {
 	if($kill == true) {
@@ -28,7 +22,7 @@ if($_POST["python"] === "start") {
 	if (exec('fuser /dev/ttyACM0') == NULL ){
 		//echo "/dev/ttyACM0 is free";
 		// Start poppy-services
-		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
+		exec('/home/poppy/.pyenv/shims/poppy-services poppy-torso --http --snap --no-browser &');
         display();
 	}
 //} elseif($_GET["python"] === "restart") {
@@ -36,7 +30,7 @@ if($_POST["python"] === "start") {
 	//echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
     exec('fuser -k /dev/ttyACM1');
-	exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser ');
+	exec('/home/poppy/.pyenv/shims/poppy-services poppy-torso --http --snap --no-browser ');
     display();
 } elseif($_POST["python"] === "stop") {
 //} elseif($_GET["python"] === "stop") {
@@ -110,7 +104,7 @@ elseif($_POST["web"] === "upgrade"){
 <p> Current versions:</p>
 <p> '.checkVersions().'</p>';
     
-    exec("pip install --upgrade poppy-humanoid > upgrades.log 2>&1 ");
+    exec("pip install --upgrade poppy-torso > upgrades.log 2>&1 ");
     
     $comments =$comments.'
 <p> Checking for upgrades</p>
@@ -168,11 +162,11 @@ if (empty($_POST)) {
 }
 
 function checkVersions(){
-$poppy_humanoid = file_get_contents("/home/poppy/dev/poppy-humanoid/software/poppy_humanoid/_version.py");
+$poppy_torso = file_get_contents("/home/poppy/dev/poppy-torso/software/poppy_torso/_version.py");
 $pypot = file_get_contents("/home/poppy/dev/pypot/pypot/_version.py");
 $poppy_creature = file_get_contents("/home/poppy/dev/poppy-creature/software/poppy/_version.py");
 
-return "<ul><li>poppy_humanoid ".$poppy_humanoid."</li><li>pypot ".$pypot."</li><li>poppy_creature ".$poppy_creature."</li></ul>";
+return "<ul><li>poppy_torso ".$poppy_humanoid."</li><li>pypot ".$pypot."</li><li>poppy_creature ".$poppy_creature."</li></ul>";
 }
 
 
@@ -189,7 +183,5 @@ echo $contents;
   }
 
 ?>
-<!--</body>
 
-</html>-->
 
