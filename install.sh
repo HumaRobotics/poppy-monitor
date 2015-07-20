@@ -93,28 +93,13 @@ if [ ! -d "$POPPY_WWW" ]; then
     mkdir $POPPY_WWW
 fi
 
-# Download sources
-echo -e "\e[33mDownload sources\e[0m"
-sudo rm /usr/local/robot/websudoer/websudoer.sh
-sudo curl https://raw.githubusercontent.com/MakingBot/webapp/master/websudoer/websudoer.sh --create-dirs -o /usr/local/robot/websudoer/websudoer.sh
-
-sudo chmod +x /usr/local/robot/websudoer/websudoer.sh
-svn checkout https://github.com/MakingBot/webapp/trunk/web "$POPPY_WWW/wireless"
-
-
-# Make $POPPY_USER owner of $POPPY_WWW
-echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
-sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
-
-echo -e "\e[33mRestart Apache\e[0m"
-sudo service apache2 restart
 
 
 ################################################################################
 ## Install home page
 ################################################################################
 # fix some svn merge failed issue
-rm $POPPY_WWW/services.php*
+#rm $POPPY_WWW/services.php*
 
 # TODO: change repo URL after pull request
 #www_url=https://github.com/show0k/poppy-installer/trunk/install-deps/www-files
@@ -134,6 +119,25 @@ sed -i "s/poppy_torso/poppy_humanoid/g" $POPPY_WWW/index.php
 echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
 sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
 
+
+################################################################################
+## Install wireless settings
+################################################################################
+# Download sources
+echo -e "\e[33mDownload sources\e[0m"
+sudo rm /usr/local/robot/websudoer/websudoer.sh
+sudo curl https://raw.githubusercontent.com/MakingBot/webapp/master/websudoer/websudoer.sh --create-dirs -o /usr/local/robot/websudoer/websudoer.sh
+
+sudo chmod +x /usr/local/robot/websudoer/websudoer.sh
+svn checkout https://github.com/MakingBot/webapp/trunk/web "$POPPY_WWW/wireless"
+
+
+# Make $POPPY_USER owner of $POPPY_WWW
+echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"
+sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
+
+echo -e "\e[33mRestart Apache\e[0m"
+sudo service apache2 restart
 
 ################################################################################
 ## Install Snap!
