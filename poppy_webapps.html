@@ -49,7 +49,7 @@
       <li><a href="#motorsdiv">Motors</a></li>
       <li><a href="#primitivesdiv">Behaviors</a></li>
       <li><a href="#pcdatadiv">Computer settings</a></li>
-      <li><a href="index.php?python=start&web=snap" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
+      <li><a href="javascript:post('/index.php', {web: 'snap'})" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
      <li><script>
 var host = "http://"+window.location.hostname;
 document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebooks</a>');
@@ -102,7 +102,7 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
                     <i class="fa fa-coffee"></i> Stop all primitives
                 </button>
                 <br/>
-                <form method=GET action="index.php?web=speak"> -->
+                <form method=POST action="index.php"> -->
                 <input type="text" name="say" value="Hello" id="to_say"/>
                 <button type="submit" name="web" value="speak" class="btn btn-default">
                     Speak
@@ -116,7 +116,7 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
             <div  id="pcdatadiv" >
             <hr>
             <h2> Computer settings </h2>
-            <button type="button" class="btn btn-default" onclick="window.open('../wireless/?page=wireless')">
+            <button type="button" class="btn btn-default" onclick="window.open('/wireless/?page=wireless')">
                     Wifi configuration
                 </button>
                 <br/>

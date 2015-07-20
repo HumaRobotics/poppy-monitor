@@ -9,51 +9,43 @@ function tty($kill) {
 }
 
 $comments = "";
-//print_r($_POST);
 
-//if(array_key_exists("python", $_GET)){
 if(array_key_exists("python", $_POST)){
 
 // Start python only if not previously started
-//if($_GET["python"] === "start") {
 if($_POST["python"] === "start") {
 	//echo "python start";
 
 	if (exec('fuser /dev/ttyACM0') == NULL ){
 		//echo "/dev/ttyACM0 is free";
 		// Start poppy-services
-		exec('/home/poppy/.pyenv/shims/poppy-services poppy-torso --http --snap --no-browser &');
+		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
         display();
 	}
-//} elseif($_GET["python"] === "restart") {
 } elseif($_POST["python"] === "restart") {
 	//echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
     exec('fuser -k /dev/ttyACM1');
-	exec('/home/poppy/.pyenv/shims/poppy-services poppy-torso --http --snap --no-browser ');
+	exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser ');
     display();
 } elseif($_POST["python"] === "stop") {
-//} elseif($_GET["python"] === "stop") {
         //echo "Stop python";
         exec('fuser -k /dev/ttyACM1');
         //sleep(1);
         exec('fuser -k /dev/ttyACM0');
         display();
 } elseif($_POST["python"] === "update") {
-//} elseif($_GET["python"] === "update") {
         echo "Not implemented";
 } 
 }
 
-//if(array_key_exists("web", $_GET)){
 if(array_key_exists("web", $_POST)){
 
-
-//if($_GET["web"] === "snap"){
 if($_POST["web"] === "snap"){
+
 echo "
            	<script type=\"text/javascript\">
-            	window.open(\"../snap/\");
+            	window.open(\"/snap/\");
 		</script>
        	";
 
@@ -65,46 +57,30 @@ Pour avoir les blocs Snap! pour Poppy, dans l\'onglet de Snap!, cliquez sur le f
    <p> To get Poppy\'s Snap! blocks, click on the file icon, then open->examples and select pypot-snap-block.</p>
   </div>';
    display();
-   
-   
-	/*echo "
-           	<script type=\"text/javascript\">
-            	document.location.href=\"../snap/\"
-		</script>
-       	";*/
 
 }
-//elseif($_GET["web"] === "speak"){
 elseif($_POST["web"] === "speak"){
-//~ if(array_key_exists("say", $_GET)){
-if(array_key_exists("say", $_POST)){
-//echo $_GET["say"];
-putenv("USER=poppy");
-//~ exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
-//~ exec ('picospeaker  "'.$_GET["say"].'" ');
-exec ('picospeaker  "'.$_POST["say"].'" ');
+    if(array_key_exists("say", $_POST)){
+    //echo $_GET["say"];
+    putenv("USER=poppy");
+    //~ exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
+    exec ('picospeaker  "'.$_POST["say"].'" ');
 
 }
-/*else{
-echo "rien to say";
-}*/
-
-//echo shell_exec ('printenv | grep USER');
 	
     display();
 }
-//~ elseif($_GET["web"] === "upgrade"){
 elseif($_POST["web"] === "upgrade"){
     
     putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
-  exec('eval "$(pyenv init -)"');
- exec( 'eval "$(pyenv virtualenv-init -)"');
+  //exec('eval "$(pyenv init -)"');
+ //exec( 'eval "$(pyenv virtualenv-init -)"');
  
  $comments ='<div class="panel panel-default">
 <p> Current versions:</p>
 <p> '.checkVersions().'</p>';
     
-    exec("pip install --upgrade poppy-torso > upgrades.log 2>&1 ");
+    exec("pip install --upgrade poppy-humanoid > upgrades.log 2>&1 ");
     
     $comments =$comments.'
 <p> Checking for upgrades</p>
@@ -113,7 +89,6 @@ elseif($_POST["web"] === "upgrade"){
   </div>';
   display();
 }
-//~ elseif($_GET["web"] === "reboot"){
 elseif($_POST["web"] === "reboot"){
     global $comments;
   $comments ='<div class="panel panel-default">
@@ -128,14 +103,11 @@ elseif($_POST["web"] === "reboot"){
    display();
 }
 elseif($_POST["web"] === "rebootsure"){
-//~ elseif($_GET["web"] === "rebootsure"){
 	echo " rebooting ";
     exec("sudo reboot");
 }
-//elseif($_GET["web"] === "poweroff"){
 elseif($_POST["web"] === "poweroff"){
     global $comments;
-   // $comments = "<h2> Poweroff: Are you sure ? </h2>";
     
     
   $comments ='<div class="panel panel-default">
@@ -149,24 +121,21 @@ elseif($_POST["web"] === "poweroff"){
   </div>';
    display();
 }
-//~ elseif($_GET["web"] === "poweroffsure"){
 elseif($_POST["web"] === "poweroffsure"){
 echo "poweroff";
 	 exec("sudo poweroff");
 }
 }
-
-//~ if (empty($_GET)) {
 if (empty($_POST)) {
     display();
 }
 
 function checkVersions(){
-$poppy_torso = file_get_contents("/home/poppy/dev/poppy-torso/software/poppy_torso/_version.py");
+$poppy_humanoid = file_get_contents("/home/poppy/dev/poppy-humanoid/software/poppy_humanoid/_version.py");
 $pypot = file_get_contents("/home/poppy/dev/pypot/pypot/_version.py");
 $poppy_creature = file_get_contents("/home/poppy/dev/poppy-creature/software/poppy/_version.py");
 
-return "<ul><li>poppy_torso ".$poppy_humanoid."</li><li>pypot ".$pypot."</li><li>poppy_creature ".$poppy_creature."</li></ul>";
+return "<ul><li>poppy_humanoid ".$poppy_humanoid."</li><li>pypot ".$pypot."</li><li>poppy_creature ".$poppy_creature."</li></ul>";
 }
 
 
