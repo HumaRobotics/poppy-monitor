@@ -14,7 +14,7 @@ fi
 ## Check all environment variables
 # POPPY_CREATURE should be set to poppy-humanoid or poppy-torso
 if [ -z ${POPPY_CREATURE+x} ]; then 
-    POPPY_CREATURE=poppy-torso
+    POPPY_CREATURE=poppy-humanoid
     echo -e "\x1b[1m\x1b[31mPOPPY_CREATURE was not set. Automaticaly set to $POPPY_CREATURE \e[0m "
 else
     echo "POPPY_CREATURE=$POPPY_CREATURE"
