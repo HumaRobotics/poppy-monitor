@@ -77,10 +77,10 @@ fi
 
 
 # Change creature name
-sed -i "s/poppy-torso/$POPPY_CREATURE/g" $POPPY_WWW/index.php
-#sed -i "s/poppy-torso/Robot $POPPY_CREATURE/g" $POPPY_WWW/poppy_webapps.html
+sed -i "s/poppy-humanoid/$POPPY_CREATURE/g" $POPPY_WWW/index.php
+poppy_creature_underscore=${POPPY_CREATURE//-/_}
+sed -i "s/poppy_humanoid/$poppy_creature_underscore/g" $POPPY_WWW/index.php
 
-sed -i "s/poppy_torso/poppy_humanoid/g" $POPPY_WWW/index.php
 
 # Make $POPPY_USER owner of $POPPY_WWW
 echo -e "\e[33mChange apache execution user to $POPPY_USER\e[0m"

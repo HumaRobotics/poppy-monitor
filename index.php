@@ -59,6 +59,44 @@ Pour avoir les blocs Snap! pour Poppy, dans l\'onglet de Snap!, cliquez sur le f
    display();
 
 }
+if($_POST["web"] === "notebooks"){
+
+ putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
+
+
+$notebooklist =  exec("ipython notebook list");
+
+//$pattern = '/server/i';
+$pattern = '/[0-9].[0-9].[0-9].[0-9]:[0-9]*/i';
+preg_match($pattern, $notebooklist, $matches);
+//print_r($matches);
+
+//if($notebooklist == ""){
+if(empty($matches)){
+//echo "start server";
+	 global $comments;
+    $comments ='<div class="panel panel-default">
+   <p> starting ipython server</p>
+  </div>';
+
+exec("cd /home/poppy; ipython notebook --ip 0.0.0.0 --no-mathjax --no-browser --quiet &");
+$port = "8888";
+}
+else{
+$port = str_replace("0.0.0.0:", "", $matches[0]);
+}
+
+//echo $port;
+echo "
+           	<script type=\"text/javascript\">
+            	window.open(\"http://".$_SERVER['SERVER_NAME'].":".$port."/tree/notebooks\");
+		</script>
+       	";
+        
+
+   display();
+
+}
 elseif($_POST["web"] === "speak"){
     if(array_key_exists("say", $_POST)){
     //echo $_GET["say"];
