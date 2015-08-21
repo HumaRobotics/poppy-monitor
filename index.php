@@ -45,7 +45,7 @@ if($_POST["web"] === "snap"){
 
 echo "
            	<script type=\"text/javascript\">
-            	window.open(\"/snap/\");
+            	window.open(\"./snap/\");
 		</script>
        	";
 
@@ -131,10 +131,10 @@ elseif($_POST["web"] === "reboot"){
     global $comments;
   $comments ='<div class="panel panel-default">
 <h2> reboot : Are you sure ? </h2>
-      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {web: \'rebootsure\'})"> 
+      <button type="button" class="btn btn-default" onclick="post(\'./index.php\', {web: \'rebootsure\'})"> 
                      Yes
                 </button>
-      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {})"> 
+      <button type="button" class="btn btn-default" onclick="post(\'./index.php\', {})"> 
                      Cancel
                 </button>
   </div>';
@@ -150,10 +150,10 @@ elseif($_POST["web"] === "poweroff"){
     
   $comments ='<div class="panel panel-default">
 <h2> Poweroff: Are you sure ? </h2>
-      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {web: \'poweroffsure\'})"> 
+      <button type="button" class="btn btn-default" onclick="post(\'./index.php\', {web: \'poweroffsure\'})"> 
                      Yes
                 </button>
-      <button type="button" class="btn btn-default" onclick="post(\'/index.php\', {})"> 
+      <button type="button" class="btn btn-default" onclick="post(\'./index.php\', {})"> 
                      Cancel
                 </button>
   </div>';

@@ -49,8 +49,8 @@
       <li><a href="#motorsdiv">Motors</a></li>
       <li><a href="#primitivesdiv">Behaviors</a></li>
       <li><a href="#pcdatadiv">Computer settings</a></li>
-      <li><a href="javascript:post('/index.php', {web: 'snap'})" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
-      <li><a href="javascript:post('/index.php', {web: 'notebooks', address: 'localhost:8888'})" aria-expanded="false" aria-controls="collapseExample">Ipython notebooks</a></li>
+      <li><a href="javascript:post('./index.php', {web: 'snap'})" aria-expanded="false" aria-controls="collapseExample">Start Snap!</a></li>
+      <li><a href="javascript:post('./index.php', {web: 'notebooks', address: 'localhost:8888'})" aria-expanded="false" aria-controls="collapseExample">Ipython notebooks</a></li>
       <!--<li><a href="javascript:post('/index.php', {web: 'notebooks', address:'http://"+window.location.hostname+":8888'})" aria-expanded="false" aria-controls="collapseExample">Ipython notebooks</a></li>
      <li><script>
 var host = "http://"+window.location.hostname;
@@ -79,11 +79,11 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
 				
             <audio id="alarm" src="./sound/alarm.ogg" loop></audio>
             <div id="motorsdiv" class="spaceup">
-            <button type="button" class="btn btn-default" onclick="post('/index.php', {python: 'start'})">
+            <button type="button" class="btn btn-default" onclick="post('./index.php', {python: 'start'})">
                     <i class="fa fa-bolt"></i> Start services
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="post('/index.php', {python: 'stop'})">
+                <button type="button" class="btn btn-default" onclick="post('./index.php', {python: 'stop'})">
                     <i class="fa fa-bolt"></i> Kill services
                 </button>
             <h2> Motors</h2>
@@ -118,20 +118,20 @@ document.write('<a href="' + host + ':8888' + '"  target="_blank">Ipython notebo
             <div  id="pcdatadiv" >
             <hr>
             <h2> Computer settings </h2>
-            <button type="button" class="btn btn-default" onclick="window.open('/wireless/?page=wireless')">
+            <button type="button" class="btn btn-default" onclick="window.open('./wireless/?page=wireless')">
                     Wifi configuration
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="post('/index.php', {web: 'upgrade'})">
+                <button type="button" class="btn btn-default" onclick="post('./index.php', {web: 'upgrade'})">
                     Software upgrade
                 </button>
                 <br/>
                 <!--<button type="button" class="btn btn-default" onclick="window.location.replace('index.php?web=poweroff')"> -->
-                <button type="button" class="btn btn-default" onclick="post('/index.php', {web: 'poweroff'})"> 
+                <button type="button" class="btn btn-default" onclick="post('./index.php', {web: 'poweroff'})"> 
                      Power off
                 </button>
                 <br/>
-                <button type="button" class="btn btn-default" onclick="post('/index.php', {web: 'reboot'})">
+                <button type="button" class="btn btn-default" onclick="post('./index.php', {web: 'reboot'})">
                      Reboot
                 </button>
                 <br/>
