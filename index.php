@@ -79,7 +79,7 @@ if(empty($matches)){
    <p> starting ipython server</p>
   </div>';
 
-exec("cd /home/poppy; ipython notebook --ip 0.0.0.0 --no-mathjax --no-browser --quiet &");
+exec("cd /home/poppy; ipython notebook --ip 0.0.0.0 --no-mathjax --no-browser &");
 $port = "8888";
 }
 else{
@@ -102,7 +102,10 @@ elseif($_POST["web"] === "speak"){
     //echo $_GET["say"];
     putenv("USER=poppy");
     //~ exec ('picospeaker -l "fr-FR" "'.$_GET["say"].'" ');
-    exec ('picospeaker  "'.$_POST["say"].'" ');
+    //exec ('picospeaker  "'.$_POST["say"].'" ');
+    
+    exec ('pico2wave -l "fr-FR" -w test.wav "'.$_POST["say"].' " ');
+exec ('aplay test.wav ');
 
 }
 	

@@ -159,7 +159,8 @@ if [ -d "$snap_dir" ]; then
     git clean -df
 else
     # git clone if it was never done
-    git clone https://github.com/show0k/Snap--Build-Your-Own-Blocks.git $snap_dir
+    #git clone https://github.com/show0k/Snap--Build-Your-Own-Blocks.git $snap_dir
+    mkdir $snap_dir
     cd $snap_dir
 fi
 
@@ -172,10 +173,10 @@ echo -e "pypot-snap-blocks.xml Poppy Blocks" >> LIBRARIES
 cd ../Examples/
 
 xml_files=$POPPY_ROOT
-path="/pypot/pypot/server/*.xml"
+path="/pypot/pypot/server/snap_projects/*.xml"
 xml_files+=$path
 
-for project in "$POPPY_ROOT/pypot/pypot/server/*.xml"; do 
+for project in xml_files; do 
     ln -s $project .
     echo -e "add $project to local examples" ;
 done
