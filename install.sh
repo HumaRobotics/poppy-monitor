@@ -52,7 +52,9 @@ else
 fi
 
 
-
+# Change owner of /var/www
+echo -e "\e[33mChange owner of $(dirname "$POPPY_WWW") to $POPPY_USER\e[0m"
+sudo chown -R $POPPY_USER:$POPPY_USER "$(dirname "$POPPY_WWW")"
 
 ################################################################################
 ## Install home page
@@ -90,9 +92,7 @@ sudo chown -R $POPPY_USER:$POPPY_USER $POPPY_WWW
 ################################################################################
 ## Install Wifi php web app
 ################################################################################
-# Change owner of /var/www
-echo -e "\e[33mChange owner of $(dirname "$POPPY_WWW") to $POPPY_USER\e[0m"
-sudo chown -R $POPPY_USER:$POPPY_USER "$(dirname "$POPPY_WWW")"
+
 
 
 # Sudo configuration for the websudoer app
