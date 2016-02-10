@@ -19,15 +19,16 @@ If you have picospeaker, you can make you robot talk.
 ## How to use it
 set your robot's type in the POPPY_CREATURE enviroment variable
 
-export POPPY_CREATURE=poppy-humanoid
+    export POPPY_CREATURE=poppy-humanoid
 
 or
 
-export POPPY_CREATURE=poppy-torso
+    export POPPY_CREATURE=poppy-torso
 
 
-use the install file (WARNING! UNTESTED !)
-curl -L https://raw.githubusercontent.com/HumaRobotics/poppy-monitor/master/install.sh | bash
+use the install file 
+
+    curl -L https://raw.githubusercontent.com/HumaRobotics/poppy-monitor/master/install.sh | bash
 
 What is does: 
 - set a few envronment variables
