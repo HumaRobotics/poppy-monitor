@@ -8,6 +8,7 @@ function tty($kill) {
 	}
 }
 
+$prefix = "/home/poppy/miniconda/envs/poppy/bin/";
 $comments = "";
 
 if(array_key_exists("python", $_POST)){
@@ -19,14 +20,14 @@ if($_POST["python"] === "start") {
 	if (exec('fuser /dev/ttyACM0') == NULL ){
 		//echo "/dev/ttyACM0 is free";
 		// Start poppy-services
-		exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser &');
+		exec($prefix.'poppy-services poppy-humanoid --http --snap --no-browser &');
         display();
 	}
 } elseif($_POST["python"] === "restart") {
 	//echo "Restart python";
 	exec('fuser -k /dev/ttyACM0');
     exec('fuser -k /dev/ttyACM1');
-	exec('/home/poppy/.pyenv/shims/poppy-services poppy-humanoid --http --snap --no-browser ');
+	exec($prefix.'poppy-services poppy-humanoid --http --snap --no-browser ');
     display();
 } elseif($_POST["python"] === "stop") {
         //echo "Stop python";
@@ -61,10 +62,10 @@ Pour avoir les blocs Snap! pour Poppy, dans l\'onglet de Snap!, cliquez sur le f
 }
 if($_POST["web"] === "notebooks"){
 
- putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
+// putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
+// putenv('PATH="/home/poppy/miniconda/envs/poppy/bin:/home/poppy/miniconda/envs/poppy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games");
 
-
-$notebooklist =  exec("ipython notebook list");
+$notebooklist =  exec($prefix."ipython notebook list");
 
 //$pattern = '/server/i';
 $pattern = '/[0-9].[0-9].[0-9].[0-9]:[0-9]*/i';
@@ -79,7 +80,7 @@ if(empty($matches)){
    <p> starting ipython server</p>
   </div>';
 
-exec("cd /home/poppy; ipython notebook --ip 0.0.0.0 --no-mathjax --no-browser &");
+exec("cd /home/poppy; ".$prefix."ipython notebook --ip 0.0.0.0 --no-mathjax --no-browser &");
 $port = "8888";
 }
 else{
@@ -113,22 +114,23 @@ exec ('aplay test.wav ');
 }
 elseif($_POST["web"] === "upgrade"){
     
-    putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
+   // putenv('PATH="/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/home/poppy/.pyenv/shims:/home/poppy/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"');
   //exec('eval "$(pyenv init -)"');
  //exec( 'eval "$(pyenv virtualenv-init -)"');
  
- $comments ='<div class="panel panel-default">
-<p> Current versions:</p>
-<p> '.checkVersions().'</p>';
+ $comments = "not implemented";
+//'<div class="panel panel-default">
+//<p> Current versions:</p>
+//<p> '.checkVersions().'</p>';
     
-    exec("pip install --upgrade poppy-humanoid > upgrades.log 2>&1 ");
+//    exec("pip install --upgrade poppy-humanoid > upgrades.log 2>&1 ");
     
-    $comments =$comments.'
-<p> Checking for upgrades</p>
-<p> New versions:</p>
-<p> '.checkVersions().'</p>
-  </div>';
-  display();
+//    $comments =$comments.'
+//<p> Checking for upgrades</p>
+//<p> New versions:</p>
+//<p> '.checkVersions().'</p>
+//  </div>';
+//  display();
 }
 elseif($_POST["web"] === "reboot"){
     global $comments;
